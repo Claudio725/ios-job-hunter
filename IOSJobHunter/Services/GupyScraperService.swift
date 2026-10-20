@@ -32,7 +32,8 @@ final class GupyScraperService: GupyScraperServiceProtocol {
                     location: item.candidate_required_location,
                     description: "Vaga obtida via API Remotive (Remoto/Global).",
                     email: "",
-                    matchScore: nil
+                    matchScore: nil,
+                    redirecturl: ""
                 )
                 mappedJobs.append(job)
             }

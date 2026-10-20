@@ -29,9 +29,22 @@
 		CAB3613B307EAB4D00D395E1 /* IOSJobHunterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSJobHunterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CA4F762A3082BBFB003042DD /* Exceptions for "IOSJobHunter" folder in "IOSJobHunter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CAB36121307EAB4B00D395E1 /* IOSJobHunter */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CAB36124307EAB4B00D395E1 /* IOSJobHunter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CA4F762A3082BBFB003042DD /* Exceptions for "IOSJobHunter" folder in "IOSJobHunter" target */,
+			);
 			path = IOSJobHunter;
 			sourceTree = "<group>";
 		};
@@ -375,6 +388,7 @@
 				DEVELOPMENT_TEAM = 9L3T9BX9S7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IOSJobHunter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IOSJobHunter;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -410,6 +424,7 @@
 				DEVELOPMENT_TEAM = 9L3T9BX9S7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IOSJobHunter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IOSJobHunter;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

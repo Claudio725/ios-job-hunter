@@ -38,7 +38,7 @@ struct ContentView: View {
                     company: job.company,
                     location: job.location,
                     email: job.email,
-                    jobUrl: job.jobUrl
+                    jobUrl: job.jobUrl, redirecturl: ""
                 )) {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(job.title)

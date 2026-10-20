@@ -34,11 +34,16 @@ struct MainCoordinatorView: View {
                         Color(red: 0.93, green: 0.94, blue: 0.95)
                             .ignoresSafeArea()
                         
-                        // Imagem centralizada da maleta/lupa que você salvou no Assets
-                        Image("LogoSplash")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 640, height: 640)
+                    // Usamos GeometryReader para garantir centralização matemática exata
+                        GeometryReader { geometry in
+                            Image("LogoSplash")
+                                .resizable()
+                                .scaledToFill()
+                                // Força a imagem a ter o tamanho da tela e centraliza o eixo de corte
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .clipped()
+                        }
+                        .ignoresSafeArea()
                 }
                 .transition(.opacity)
                 .zIndex(1)

@@ -13,7 +13,7 @@ final class MockJobRepository: JobRepositoryProtocol {
     var stubbedJobs: [JobPost] = []
     var shouldFail = false
 
-    func getIOSJobs() async throws -> [JobPost] {
+    func getIOSJobs(country: String) async throws -> [JobPost] {
         if shouldFail {
             throw NSError(domain: "TestError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Falha na API"])
         }
@@ -69,7 +69,8 @@ final class JobHunterTests: XCTestCase {
             company: "Apple",
             location: "Remoto",
             description: descriptionWithEmail,
-            email: "" // Vazio para forçar o Regex
+            email: "", // Vazio para forçar o Regex
+            redirecturl: ""
         )
         
         mockRepository.stubbedJobs = [job]
@@ -91,7 +92,8 @@ final class JobHunterTests: XCTestCase {
             company: "Google",
             location: "São Paulo",
             description: "Texto sem e-mail explícito.",
-            email: "direto@api.com"
+            email: "direto@api.com",
+            redirecturl: ""
         )
         
         mockRepository.stubbedJobs = [job]
@@ -111,7 +113,8 @@ final class JobHunterTests: XCTestCase {
             company: "Startup",
             location: "Rio",
             description: "Acesse nosso site e cadastre seu currículo pela plataforma web.",
-            email: ""
+            email: "",
+            redirecturl: ""
         )
         
         mockRepository.stubbedJobs = [job]
@@ -138,3 +141,4 @@ final class JobHunterTests: XCTestCase {
         XCTAssertFalse(sut.isLoading)
     }
 }
+

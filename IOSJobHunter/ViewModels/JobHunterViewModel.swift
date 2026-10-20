@@ -40,20 +40,20 @@ final class JobHunterViewModel {
             self.aiOptimizerService = aiOptimizerService ?? AIOptimizerService()
         }
 
-    func fetchAndAnalyzeIOSJobs() async {
+    func fetchAndAnalyzeIOSJobs(country: String = "br") async {
             isLoading = true
             errorMessage = nil
             
             do {
                 // 1. Busca as vagas puras do repositório
-                let fetchedJobs = try await jobRepository.getIOSJobs()
+                let fetchedJobs = try await jobRepository.getIOSJobs(country: country)
                 
                 // 2. Processa cada vaga para garantir que o e-mail seja preenchido (via API ou Regex na description)
                 let processedJobs = fetchedJobs.map { job -> JobPost in
                     // Se o e-mail já vier preenchido, mantemos. Se estiver vazio, rodamos o Regex na descrição.
                     let finalEmail: String
                     if job.email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        finalEmail = extractEmail(from: job.description)
+                        finalEmail =  extractEmail(from: job.description)
                     } else {
                         finalEmail = job.email
                     }
@@ -61,11 +61,16 @@ final class JobHunterViewModel {
                     // Retorna uma cópia atualizada do JobPost com o e-mail garantido
                     var updatedJob = job
                     updatedJob.email = finalEmail
+                    updatedJob.redirecturl = job.redirecturl
                     return updatedJob
                 }
                 
-                // 3. Passa a lista processada para o serviço de IA calcular o Match Score
-                self.jobs = try await aiOptimizerService.calculateMatchForProfile(jobs: processedJobs)
+                // 3. Comente a IA temporariamente para testar se as vagas entram na tela:
+                // self.jobs = try await aiOptimizerService.calculateMatchForProfile(jobs: processedJobs)
+
+                // Atualiza a tela direto com as vagas que vieram da Adzuna:
+                self.jobs = processedJobs
+                
                 
             } catch {
                 self.errorMessage = "Erro ao carregar vagas: \(error.localizedDescription)"
@@ -91,3 +96,4 @@ final class JobHunterViewModel {
         return "" // Retorna vazio se não achar nenhum e-mail no texto
     }
 }
+

@@ -15,14 +15,17 @@ struct JobPost: Identifiable, Codable {
     let description: String
     var email: String
     var matchScore: Int?
+    var redirecturl: String
 
-    init(id: String, title: String, company: String, location: String, description: String, email: String, matchScore: Int? = nil) {
+    init(id: String, title: String, company: String, location: String, description: String, email: String,
+         matchScore: Int? = nil, redirecturl: String) {
         self.id = id
         self.title = title
         self.company = company
         self.location = location
         self.description = description
-        self.email = email
+        self.email = ""
         self.matchScore = matchScore
+        self.redirecturl = redirecturl
     }
 }
