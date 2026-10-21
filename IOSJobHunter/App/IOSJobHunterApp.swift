@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 @main
 struct IOSJobHunterApp: App {
     var body: some Scene {
@@ -24,35 +22,38 @@ struct MainCoordinatorView: View {
 
     var body: some View {
         ZStack {
-            // 1. Sua tela principal (ContentView ou a raiz do seu app)
+            // 1. Sua tela principal
             JobHunterView()
             
             // 2. Camada da Splash Screen por cima
             if showSplash {
                 ZStack {
-                    // Tom cinza-claro/gelo sutil que acompanha o fundo da figura original
-                        Color(red: 0.93, green: 0.94, blue: 0.95)
-                            .ignoresSafeArea()
+                    // Gradiente azul de fundo (você pode alterar as cores conforme preferir)
+                    LinearGradient(
+                        colors: [Color.blue, Color.indigo],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .ignoresSafeArea()
                         
-                    // Usamos GeometryReader para garantir centralização matemática exata
-                        GeometryReader { geometry in
-                            Image("LogoSplash")
-                                .resizable()
-                                .scaledToFill()
-                                // Força a imagem a ter o tamanho da tela e centraliza o eixo de corte
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                                .clipped()
-                        }
-                        .ignoresSafeArea()
+                    // Logo centralizado
+                    GeometryReader { geometry in
+                        Image("LogoSplash")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .clipped()
+                    }
+                    .ignoresSafeArea()
                 }
                 .transition(.opacity)
                 .zIndex(1)
             }
         }
         .onAppear {
-            // Tempo que a Splash Screen fica visível na tela (ex: 1.5 segundos) antes de sumir suavemente
+            // Garantindo que a alteração de estado ocorra de forma segura na thread principal
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                withAnimation(.easeOut(duration: 0.3)) {
+                withAnimation(.easeInOut(duration: 0.3)) {
                     showSplash = false
                 }
             }

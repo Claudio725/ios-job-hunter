@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JobPost: Identifiable, Codable {
+struct JobPost: Identifiable, Codable, Equatable {
     let id: String
     let title: String
     let company: String
